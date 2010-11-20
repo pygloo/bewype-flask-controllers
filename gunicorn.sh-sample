@@ -4,10 +4,46 @@ GUNICORN=/usr/bin/gunicorn
 ROOT=~/bewype/bewype-flask-controllers
 PID=/var/run/gunicorn.pid
 
-APP=bewype.flask:app
+APP=bewype.flask.controllers:app
 
-if [ -f $PID ]; then rm $PID fi
+# Start
+start() {
+  cd $ROOT
+  exec $GUNICORN -c $ROOT/gunicorn.conf.py --pid=$PID $APP 
+}
 
-cd $ROOT
-exec $GUNICORN -c $ROOT/gunicorn.conf.py --pidfile=$PID $APP
+# Stop
+stop() {
+  if [ -f $PID ]
+  then
+    kill -9 `cat $PID`
+    rm $PID
+    sleep 5
+  fi
+}
+
+case "$1" in
+  start)
+        echo -n "Starting Gunicorn: "
+        stop
+        start
+        ;;
+  stop)
+        echo -n "Stopping Gunicorn: "
+        stop
+        ;;
+
+  restart)
+        echo -n "Restarting Gunicorn: "
+        stop
+        start
+        ;;
+  *)
+        N=/etc/init.d/$NAME
+        echo "Usage: $N {start|stop|restart}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0
 
