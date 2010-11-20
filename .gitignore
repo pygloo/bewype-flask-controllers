@@ -2,3 +2,6 @@ syntax: glob
 *.egg-info
 *.pyc
 *.swp
+config.ini
+gunicorn.conf.py
+gunicorn.sh
