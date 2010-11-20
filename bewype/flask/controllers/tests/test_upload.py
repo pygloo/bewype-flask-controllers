@@ -12,7 +12,7 @@ from werkzeug import EnvironBuilder, Request, run_wsgi_app
 from bewype import config
 from bewype.flask.controllers import upload
 
-class FlaskrTestCase(unittest.TestCase):
+class UploadTestCase(unittest.TestCase):
 
     def setUp(self):
         # upload file path
