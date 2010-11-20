@@ -21,7 +21,7 @@ class Config(object):
             :see: `ConfigParser.SafeConfigParser`
             """
             # get config dir
-            _config_dir = os.path.abspath(os.path.dirname(__file__))
+            _config_dir = os.path.abspath(os.path.dirname(__name__))
             # read config
             self.config = SafeConfigParser()
             self.config.read(os.path.join(_config_dir, 'config.ini'))

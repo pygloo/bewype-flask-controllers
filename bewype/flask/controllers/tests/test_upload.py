@@ -35,7 +35,6 @@ class FlaskrTestCase(unittest.TestCase):
         # parse response
         for _i in _app_iter:
             _filename = _i
-        print _filename
         # get uploads path
         _uploads_path = config.Config().get('path>uploads')
         # set upload path main var for removal
