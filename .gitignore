@@ -4,3 +4,6 @@ syntax: glob
 *.swp
 *.ini
 *.ini.py
+config.ini
+gunicorn.conf.py
+gunicorn.sh
