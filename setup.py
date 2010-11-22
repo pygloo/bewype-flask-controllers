@@ -27,7 +27,10 @@ setup(
     namespace_packages=[
             "bewype.flask.controllers",
             ],
-    entry_points={},
+    entry_points="""
+        [console_scripts]
+        bewype-flask-controllers = bewype.flask.controllers:run
+    """,
     test_suite = "bewype.flask.controllers.tests",
     )
 
