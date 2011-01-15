@@ -2,13 +2,14 @@
 # -*- coding: utf-8 -*-
 
 # python import
-import os, json
+import json, os
 
 # flask import
 from flask import request
 
 # bewype import
-from bewype import config, tools
+from bewype import tools
+from bewype.config import c
 from bewype.flask import app
 
 def _get_file_info( file_ ):
@@ -30,7 +31,9 @@ def _get_file_info( file_ ):
                 }
     # nothing for standard files yet
     else:
-        return None
+        return {
+                'contentType': _content_type
+                }
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -38,10 +41,8 @@ def upload():
     _file = request.files['file']
     # get unique file name
     _file_name = tools.random_str(24)
-    # get uploads path
-    _uploads_path = config.Config().get('path>uploads')
     # do save
-    _file.save(os.path.join(_uploads_path, _file_name))
+    _file.save(os.path.join(c.path.uploads, _file_name))
     # get some info about this file
     _file_info = _get_file_info(_file)
     _file_info['fileName'] = _file_name

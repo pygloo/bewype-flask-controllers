@@ -1,6 +1,0 @@
-[main]
-debug = True
-
-[path]
-uploads = <path_to_an_upload_folder>/uploads
-

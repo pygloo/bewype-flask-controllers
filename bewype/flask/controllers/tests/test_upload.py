@@ -2,15 +2,16 @@
 # -*- coding: utf-8 -*-
 
 # python import
-import os, unittest
+import json, os, unittest
 from StringIO import StringIO
 
 # werkzeug import
 from werkzeug import EnvironBuilder, Request, run_wsgi_app
 
 # bewype import
-from bewype import config
+from bewype.config import c
 from bewype.flask.controllers import upload
+
 
 class UploadTestCase(unittest.TestCase):
 
@@ -34,19 +35,25 @@ class UploadTestCase(unittest.TestCase):
         _app_iter, _status, _headers = run_wsgi_app(upload.app, _environ)
         # parse response
         for _i in _app_iter:
-            _filename = _i
-        # get uploads path
-        _uploads_path = config.Config().get('path>uploads')
+            # load data
+            _data = json.loads(_i)
+            # get filename
+            _content_type = _data['contentType']
+            _file_name = _data['fileName']
         # set upload path main var for removal
-        self.upload_file_path = os.path.join(_uploads_path, _filename)
+        self.upload_file_path = os.path.join(c.path.uploads, _file_name)
+        # check content type
+        assert _content_type == 'text/plain',\
+                'Found: %s' % _content_type
         # check was uploaded
-        assert os.path.exists(self.upload_file_path)
+        assert os.path.exists(self.upload_file_path),\
+                'Found: %s' % self.upload_file_path
         # open file
         _f = open(self.upload_file_path)
         # check content
         assert _f.read() == 'This is a test'
         _f.close()
 
+
 if __name__ == '__main__':
     unittest.main()
-
