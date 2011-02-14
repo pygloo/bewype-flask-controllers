@@ -1,0 +1,11 @@
+{% extends theme('layout.html') %}
+
+{% set title = 'Index' %}
+
+{% block body %}
+
+<h1>{{ greetings }}</h1>
+
+{{ {'id': 'demo-id', 'class': 'demo-class'}|stock_search|safe }}
+
+{% endblock body %}

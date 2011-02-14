@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# (C) Copyright 2010 Bewype <http://www.bewype.org>
 
 # python import
 import json, os

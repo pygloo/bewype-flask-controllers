@@ -1,0 +1,25 @@
+{% extends theme('layout.html') %}
+
+{% set title = 'Themes' %}
+
+{% block body %}
+
+<h2>Theme Selection</h2>
+
+{% for _t in themes %}
+
+<h3>{{ _t.name }}</h3>
+
+<p class=themes-meta>
+    By {{ _t.author }}{% if _t.license %}, license: {{ _t.license }}{% endif %}
+</p>
+<p>
+    {{ _t.description }}
+</p>
+<p class=themes-select>
+    {{ link_to('Select this theme', 'themes_save', identifier=_t.identifier) }}
+</p>
+
+{% endfor %}
+
+{% endblock body %}
