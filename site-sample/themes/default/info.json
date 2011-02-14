@@ -1,0 +1,8 @@
+{
+    "application": "bewype-flask-stocks",
+    "identifier": "default",
+    "name": "Default Theme",
+    "author": "florent.pigout@gmail.com",
+    "description": "The theme use by default.",
+    "license": "MIT"
+}
